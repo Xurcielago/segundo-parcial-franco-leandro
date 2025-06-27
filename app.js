@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.json());
-app.use("/api", PORT)
+app.use("/api", routerDB)
 
 app.listen(PORT, async() => {
     await start();

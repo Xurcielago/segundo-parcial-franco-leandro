@@ -1,11 +1,11 @@
 import { Router } from "express";
 const routerDB = Router();
-//import {} from ../controllers/book.controllers.js
+import { createBook } from "../controllers/book.controllers";
 
 routerDB.get("/books", )
-routerDB.get("/books:id", )
-routerDB.post("/books", )
-routerDB.post("/books:id",)
-routerDB.delete("/books:id",)
+routerDB.get("/books/:id", )
+routerDB.post("/books", createBook )
+routerDB.post("/books/:id",)
+routerDB.delete("/books/:id",)
 
 export default routerDB
