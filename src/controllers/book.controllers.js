@@ -36,7 +36,34 @@ export const createBook = async (req, res) => {
         res.status(201).json("Libro creado correctamente")
     } catch (err) {
         res.status(500).json({ message: 'Error del lado interno del servidor: ', error: err.message })
-
     }
 }
+
+//GET /api/books: listar todos los libros
+export const listALLbook = async (req, res) => {
+    try {
+        const listedBooks = await bookModel.findAll()
+        res.json(listedBooks)
+
+    } catch (err) {
+        res.status(500).json({ message: 'Error del lado interno del servidor: ', error: err.message })
+    }
+
+};
+
+//GET /api/books/:id: obtener un libro por ID
+export const listBookById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const listedBookID = await bookModel.findByPk(id);
+        if (listedBookID) {
+            res.status(200).json(listedBookID);
+        } else {
+            res.status(404).json({ message: 'El libro buscado no existe' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error del lado interno del servidor: ', error: err.message })
+    }
+};
 
