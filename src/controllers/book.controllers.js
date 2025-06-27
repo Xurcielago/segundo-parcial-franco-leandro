@@ -67,3 +67,18 @@ export const listBookById = async (req, res) => {
     }
 };
 
+//DELETE /api/books/:id: eliminar un libro
+export const deleteBook = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const findBook = await bookModel.findByPk(id);
+        if (findBook) {
+            await findBook.destroy()
+            res.json({ message: 'Libro eliminado correctamente' })
+        } else {
+            res.status(404).json({ message: 'El libro que se intenta eliminar no existe' })
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error del lado interno del servidor: ', error: err.message })
+    }
+}
